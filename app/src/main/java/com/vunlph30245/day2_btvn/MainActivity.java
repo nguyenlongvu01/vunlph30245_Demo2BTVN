@@ -1,12 +1,16 @@
 package com.vunlph30245.day2_btvn;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,12 +29,20 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<SanPham> list = sanPhamDAO.getDS();
 
         // Thiết lập LayoutManager cho RecyclerView
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerDanhSach.setLayoutManager(linearLayoutManager);
 
+        DividerItemDecoration dividerHorizontal = new
+                DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+//        dividerHorizontal.setDrawable(ContextCompat.getDrawable(this, android.R.drawable.divider_horizontal_bright));
+
+        recyclerDanhSach.addItemDecoration(dividerHorizontal);
+
         // Khởi tạo Adapter và gán cho RecyclerView
-        SanPhamAdapter adapter = new SanPhamAdapter(list);
+        SanPhamAdapter adapter = new SanPhamAdapter(this,list);
         recyclerDanhSach.setAdapter(adapter);
+
+
 
     }
 }

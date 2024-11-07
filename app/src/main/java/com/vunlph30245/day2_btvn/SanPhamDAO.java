@@ -15,11 +15,12 @@ public class SanPhamDAO {
 
     public ArrayList<SanPham> getDS() {
         ArrayList<SanPham> list = new ArrayList<>();
-        Cursor cursor = db.rawQuery("SELECT TenSP, Price FROM SanPham", null);
+        Cursor cursor = db.rawQuery("SELECT TenSP, Price, LinkAnh FROM SanPham", null);
         while (cursor.moveToNext()) {
             String tenSP = cursor.getString(0);
             int price = cursor.getInt(1);
-            list.add(new SanPham(tenSP, price)); // Khởi tạo SanPham với 2 tham số
+            String linkAnh = cursor.getString(2);
+            list.add(new SanPham(tenSP, price, linkAnh)); // Khởi tạo SanPham với 3 tham số
         }
         cursor.close();
         return list;
